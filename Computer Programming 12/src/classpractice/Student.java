@@ -1,44 +1,55 @@
-package classpractice;
+package classPractice;
 import java.util.ArrayList;
 
 public class Student {
 
+    private final String name;
+    private final int studentID;
+    private final ArrayList<Course> courses;
 
-    private String FirstName;
-
-    public String getFirstName() {
-        return FirstName;
+    public static int latestStudentId = 1;
+    public static int studentIdGenerator() {
+        return latestStudentId++;
     }
 
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
+    public Student(String name) {
+        this.name = name;
+        this.studentID = studentIdGenerator();
+        this.courses = new ArrayList<>();
     }
 
-    public int getID() {
-        return ID;
+    public String getName() {
+        return name;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public int getStudentID() {
+        return studentID;
     }
 
-    private int ID;
-
-    static int StudentID = 0;
-
-
-    Student(String Firstname) {
-        this.FirstName = FirstName;
-        ID = increment();
-
-    }
-    public static int increment(){
-        return StudentID++;
+    public ArrayList<Course> getCourses() {
+        return courses;
     }
 
+    public void addCourse(Course course) {
+        courses.add(course);
+    }
+
+    public double getAverage() {
+        double total = 0;
+        for (Course course : courses) {
+            total += course.getStudentGrade();
+        }
+        return total / courses.size();
+    }
+
+    public void printCourses() {
+        for (Course course : courses) {
+            System.out.println(course);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + studentID + ")";
+    }
 }
-
-
-
-
-
